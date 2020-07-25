@@ -1,0 +1,27 @@
+= Dancing Godot
+
+簡単にShaderを学ぶ
+
+== sahder_type
+これを書かないと始まらない
+
+canvas_itemなど
+
+== void vertex(){}
+
+GLSLとの相違として +
+vertex shader の main関数を書く代わりに [red]#vertex# 関数と [red]#fragment# 関数を書く
+
+
+[source,gdscript]
+----
+include::../../Shaders/dancing_godot.shader[]
+----
+
+
+
+== uniform変数
+
+外部から渡す変数
+
+グローバルレベルに #uniform# をつけて宣言する
