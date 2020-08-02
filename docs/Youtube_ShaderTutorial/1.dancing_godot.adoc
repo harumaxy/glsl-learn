@@ -25,3 +25,4 @@ include::../../Shaders/dancing_godot.shader[]
 外部から渡す変数
 
 グローバルレベルに #uniform# をつけて宣言する
+

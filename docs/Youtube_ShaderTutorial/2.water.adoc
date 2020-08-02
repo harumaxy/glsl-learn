@@ -1,0 +1,29 @@
+= Water
+
+.学ぶこと
+* TEXTUREの利用
+* 新たな組み込み関数
+** sin
+** cos
+** texture
+* 新たな組み込み変数
+** TEXTURE
+** TIME
+** UV
+
+
+== source
+
+[source,gdscript,attributes]
+----
+include::../../Scenes/water/water.shader[attributes]
+----
+
+
+== shaderを使い回す
+
+Sprite に `ShaderMaterial` をつけて、そこに `Shader` スクリプトをつけている。
+
+ShaderMaterial をリソースとして保存すれば、別のシーンのノードに同じ Shader を適用できる。 +
+`ShaderParam` を独自に適用した状態で保存できる +
+`.material`拡張子で保存するのがおすすめ 

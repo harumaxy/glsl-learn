@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/water/textures/water_diffuse.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/water/water.shader" type="Shader" id=2]
+[ext_resource path="res://Scenes/water/WaterSprite.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/tiled_factor = Vector2( 10, 10 )
+shader_param/aspect_ratio = 0.651784
+shader_param/time_scale = Vector2( 1.316, 1.458 )
+shader_param/offset_scale = Vector2( 0.4, 0.4 )
+shader_param/amplitude = Vector2( 0.2, 0.734 )
+
+[node name="Water" type="Node"]
+
+[node name="WaterSprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 230.684, 74 )
+scale = Vector2( 1.51028, 0.984375 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+[connection signal="item_rect_changed" from="WaterSprite" to="WaterSprite" method="calc_aspect_ratio"]
