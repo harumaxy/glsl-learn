@@ -1,0 +1,71 @@
+
+= 4.lighting
+
+== source
+
+[source,glsl,attributes]
+----
+include::../../Scenes/Lighting/Lighting.shader[attributes]
+----
+
+変わったところは法線マップだけ
+
+== Light2D
+このシェーダーは、法線マップの操作を追加しただけ。 +
+なので、視覚効果を確認するには、Light2D ノードを追加するのがわかりやすい。
+
+Light2D のモードは色々ある
+
+* Add
+* Mix
+
+2Dの場合、基本的には、白黒の画像をテクスチャとして用意しておく必要がある
+
+
+== NORMALMAP, NORMAL_TEXTURE
+
+COLOR, TEXTURE の関係と同じ +
+`fragment`シェーダーの中で、この値を設定することで +
+出力される画像の 法線マップを操作する。
+
+`NORMALMAP`はvec3なので、rgbだけ取り出して設定すればおｋ +
+(透明度の概念はない)
+
+
+`NORMAL_TEXTURE`は、Sprite ノードのインスペクタから追加した Normal のテクスチャの入った +
+`Sampler2D`のグローバル変数
+
+`texture(sampler2D, uv)` で色を取り出せる
+
+== normal map (texture) とは？
+
+
+[法線マップ（Normal Map）（Bump mapping） - Unity マニュアル]
+(https://docs.unity3d.com/ja/2019.4/Manual/StandardShaderMaterialParameterNormalMap.html)
+
+[バンプマッピング - Wikipedia](https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%B3%E3%83%97%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0)
+
+
+法線マッピングは、バンプマッピングの進化版 +
+コンピュータグラフィックスに置いて、平面に立体感をもたせる手法
+
+低密度ポリゴンに、高密度ポリゴンモデルで生成した NormalMap をマッピングすると、 +
+要領を節約しつつリッチなディテールを追加できる
+
+
+
+=== bump map vs normal map
+
+* bump = 高さ
+* normal = 表面の向き
+
+bump は高さ(z軸)の情報しか持たないが、 +
+normal は(x, y, z)の情報を持つので更に高度。
+
+normal を使うと、影を計算できる +
+Light と Normal のベクトルの角度から計算する。
+
+normalマップは、3Dモデルを作って特殊なソフトでエクスポートする必要があるが、 +
+bumpマップは原始的なのでペイントソフトで自作できたりする。
+
+

@@ -14,7 +14,7 @@
 
 == source
 
-[source,gdscript,attributes]
+[source,glsl,attributes]
 ----
 include::../../Scenes/water/water.shader[attributes]
 ----

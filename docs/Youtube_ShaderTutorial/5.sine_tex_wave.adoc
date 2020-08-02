@@ -1,0 +1,47 @@
+= 5.sine_tex_wave
+
+`#2` と `#3` の
+
+* sin, cos による波
+* textureから取得した rgb 値に基づいてずらした波
+
+を組み合わせるだけ
+
+色々増えてきて面倒なので、関数で分けるとやりやすいかも
+
+
+== shader script functions 
+至ってふつーの C言語ライクな関数。
+
+ただし、`TIME` `COLOR` `TEXTURE` `NORMALMAP`など、 +
+`fragment` や `vertex` で暗黙的に使えることになっているグローバル変数が +
+独自定義の関数内では使えない。
+
+
+また、多分　`値渡し` なので +
+引数変数に値を代入しても戻り値にはできないと思う。 +
+試したらだめだった
+
+[source,C,attributes]
+----
+void set_color(vec4 color){
+	color = vec4(1.);
+}
+
+// 意味がない
+void fragment(){
+  set_color(COLOR);
+}
+----
+
+
+
+すなわち、副作用操作はせず、引数を取って戻り値を返す #純粋関数# スタイルにすべし
+
+
+== source
+
+[source,glsl,attributes]
+----
+include::../../Scenes/Functions/ShaderFunction.shader[attributes]
+----

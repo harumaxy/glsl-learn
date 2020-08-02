@@ -1,0 +1,58 @@
+= 3.texture_based_defomation
+
+テクスチャベースの変形
+
+
+== source
+
+[source,glsl,attributes]
+----
+include::../../Scenes/texture_based_deform/TextureBasedDeform.shader[attributes]
+----
+
+== water_uv_offset texture
+ランダムなRGBで構成されたテクスチャ。 +
+
+* uniform 変数で `sampler2D` として外部から入力
+* `texture()`関数である位置の `rg` を取得
+* 2倍して1引く = 0.5 以下の rg 値を切り捨てる
+
+そして最後に、`water` テクスチャから色を取ってくる部分で、 +
+rg -> xy に変換して、テクスチャの位置を取る部分をずらすことで +
+微妙に画像を歪ませる。
+
+波打ちの演出
+
+
+== normal map (texture) とは？
+
+
+[法線マップ（Normal Map）（Bump mapping） - Unity マニュアル]
+(https://docs.unity3d.com/ja/2019.4/Manual/StandardShaderMaterialParameterNormalMap.html)
+
+[バンプマッピング - Wikipedia](https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%B3%E3%83%97%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0)
+
+
+法線マッピングは、バンプマッピングの進化版 +
+コンピュータグラフィックスに置いて、平面に立体感をもたせる手法
+
+低密度ポリゴンに、高密度ポリゴンモデルで生成した NormalMap をマッピングすると、 +
+要領を節約しつつリッチなディテールを追加できる
+
+
+
+=== bump map vs normal map
+
+* bump = 高さ
+* normal = 表面の向き
+
+bump は高さ(z軸)の情報しか持たないが、 +
+normal は(x, y, z)の情報を持つので更に高度。
+
+normal を使うと、影を計算できる +
+Light と Normal のベクトルの角度から計算する。
+
+normalマップは、3Dモデルを作って特殊なソフトでエクスポートする必要があるが、 +
+bumpマップは原始的なのでペイントソフトで自作できたりする。
+
+
